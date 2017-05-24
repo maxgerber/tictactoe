@@ -2,3 +2,13 @@ html, body {
     height: 100%;
     width: 100%;
 }
+
+table {
+    /*border: 3px solid black;*/
+    margin: auto;
+}
+
+td {
+    padding: 7em;
+    border: 3px solid black;
+}

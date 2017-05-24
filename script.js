@@ -1,3 +1,14 @@
 window.addEventListener("DOMContentLoaded", function() {
-//Add most of your code here!
+  var ticTT = [ " "," "," "," "," "," "," "," "," " ],
+      td = document.getElementsByTagName("td"),
+      i = 0;
+
+  function screenify() {
+    for ( ; i < ticTT.length; i++ ) {
+      document.getElementsByTagName("td")[i].innerHTML = ticTT[i];
+    }
+  }
+
+  
+  screenify();
 });
