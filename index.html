@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Max Gerber</title>
+  <title>Tic Tac Toe | Max Gerber</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Tic Tac Toe" content="A simple game">
   <meta name="Max Gerber" content="GitHub">
@@ -14,8 +14,21 @@
 </head>
 
 <body>
-    <p></p>
-    <table id="tictactoe">
+    <section id="letterform">
+        <form id="choose-letter">
+            <fieldset>
+               <legend>Which letter?</legend>
+               <input id="x" type="radio" name="letters" value="X" checked>
+               <label for="x">X</label><br>
+               <input id="o" type="radio" name="letters" value="O">
+               <label for="o">O</label><br>
+             </fieldset>
+             <input type="submit" name="submit" value="Start!" id="submit">
+        </form>
+    </section>
+
+    <section id="ttt-container">
+        <table id="tictactoe">
         <tr>
             <td></td>
             <td></td>
@@ -31,6 +44,7 @@
             <td></td>
             <td></td>
     </table>
+  </section>
 </body>
 
 </html>
