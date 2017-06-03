@@ -4,8 +4,10 @@ window.addEventListener("DOMContentLoaded", function() {
     td = document.getElementsByTagName("td"),
     human = "",
     computer = "",
-    computerCell = "",
+    computerCell,
     humansTurn = true,
+    emptyLength = 0,
+    randomNumber = 0,
     el = document.getElementById("letterform"),
     el2 = document.getElementById("tictactoe"),
     el3 = document.getElementById("x"),
@@ -28,15 +30,16 @@ window.addEventListener("DOMContentLoaded", function() {
     el2.style.visibility = "visible";
   }
 
-  function submitLetter(submit) {
+  function submitLetter( submit ) {
     submit.preventDefault();
-    if (el3.checked) {
+    if ( el3.checked ) {
       human = "X";
       computer = "O";
     } else {
       human = "O";
       computer = "X";
     }
+
     dissolveForm();
   }
 
@@ -48,12 +51,13 @@ window.addEventListener("DOMContentLoaded", function() {
 
   function checkEmpties() {
     emptyCells = [];
-    for (var i = 0; i < els.length; i++) {
+    for ( var i = 0; i < ticTT.length; i++ ) {
       if ( ticTT[i] === "" ) {
         emptyCells.push(i);
       }
     }
-    emptyCells
+    emptyLength = emptyCells.length;
+    randomNumber = Math.floor( Math.random() * emptyLength );
   }
 
   function checkWinHuman() {
@@ -96,19 +100,17 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 
   function computersTurn() {
-    var randomNumber = Math.floor( Math.random() * 9 );
     checkEmpties();
     computerCell = emptyCells[randomNumber];
-    els[computerCell].innerHTML = computer;
+    els[ computerCell ].innerHTML = computer;
     updateTheArray();
     checkWin();
   }
 
   function yourTurnMyTurn() {
-      if ( humansTurn === true ) {
-        this.innerHTML = human;
-      }
+      this.innerHTML = human;
       updateTheArray();
+      checkEmpties();
       computersTurn();
   }
 
