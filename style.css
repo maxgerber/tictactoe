@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+
 html, body {
     height: 100%;
     width: 100%;
@@ -40,6 +42,11 @@ table tr:last-child td {
 
 table tr td:last-child {
   border-right: 0;
+}
+
+legend {
+  font-family: Audiowide;
+  color: green;
 }
 
 #letterform {
@@ -96,4 +103,34 @@ table tr td:last-child {
     background-color: grey;
     margin-top: 0.5em;
     transition: 0.2s;
+}
+
+.scoreboard {
+  position: absolute;
+  text-align: center;
+  font-size: 3em;
+  font-family: sans-serif;
+  width: 10%;
+  border: 3px solid black;
+  padding: 0.3em;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+  margin: auto;
+  visibility: hidden;
+  transition: 5s;
+}
+
+#scoreboard-human {
+    left: 4%;
+    background-color: #FFA07A;
+}
+
+#scoreboard-computer {
+    right: 4%;
+    background-color: #AAFDE6;
+}
+
+.player {
+    font-weight: 600;
+    font-size: 2em;
 }

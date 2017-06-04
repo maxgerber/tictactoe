@@ -1,26 +1,29 @@
 window.addEventListener("DOMContentLoaded", function() {
+
   var ticTT = ["", "", "", "", "", "", "", "", ""],
       emptyCells = [],
-    td = document.getElementsByTagName("td"),
-    human = "",
-    computer = "",
-    computerCell,
-    humansTurn = true,
-    emptyLength = 0,
-    randomNumber = 0,
-    el = document.getElementById("letterform"),
-    el2 = document.getElementById("tictactoe"),
-    el3 = document.getElementById("x"),
-    el4 = document.getElementById("choose-letter"),
-    el5 = document.getElementById("o"),
-    el6 = document.getElementById("submit"),
-    els = document.getElementsByTagName("td");
-
-  function screenify() {
-    for (var i = 0; i < ticTT.length; i++) {
-      document.getElementsByTagName("td")[i].innerHTML = ticTT[i];
-    }
-  }
+      td = document.getElementsByTagName("td"),
+      human = "",
+      computer = "",
+      computerCell,
+      humansTurn = true,
+      emptyLength = 0,
+      randomNumber = 0,
+      humanScore = 0,
+      computerScore = 0,
+      lastWinner = "",
+      el = document.getElementById("letterform"),
+      el2 = document.getElementById("tictactoe"),
+      el3 = document.getElementById("x"),
+      el4 = document.getElementById("choose-letter"),
+      el5 = document.getElementById("o"),
+      el6 = document.getElementById("submit"),
+      el7 = document.getElementById("human"),
+      el8 = document.getElementById("human-score"),
+      el9 = document.getElementById("computer"),
+      el10 = document.getElementById("computer-score"),
+      els = document.getElementsByTagName("td"),
+      els2 = document.getElementsByClassName("scoreboard");
 
   function dissolveForm() {
     el.style.opacity = "0";
@@ -28,6 +31,16 @@ window.addEventListener("DOMContentLoaded", function() {
     el.className += "left-to-right";
     el.style.left = "200%";
     el2.style.visibility = "visible";
+    showScoreBoard();
+  }
+
+  function showScoreBoard() {
+    el7.innerHTML = human;
+    el8.innerHTML = humanScore;
+    el9.innerHTML = computer;
+    el10.innerHTML = computerScore;
+    els2[0].style.visibility = "visible";
+    els2[1].style.visibility = "visible";
   }
 
   function submitLetter( submit ) {
@@ -71,7 +84,13 @@ window.addEventListener("DOMContentLoaded", function() {
         ticTT[2] === human && ticTT[4] === human && ticTT[6] === human ||
         ticTT[0] === human && ticTT[4] === human && ticTT[8] === human
          ) {
+        lastWinner = "human";
         alert("YOU WON");
+
+        gameOver();
+        return true;
+     } else {
+       return false;
      }
   }
 
@@ -86,32 +105,38 @@ window.addEventListener("DOMContentLoaded", function() {
         ticTT[2] === computer && ticTT[4] === computer && ticTT[6] === computer ||
         ticTT[0] === computer && ticTT[4] === computer && ticTT[8] === computer
          ) {
+        lastWinner = "computer";
         alert("YOU LOST SUCKAAA");
+        gameOver();
+        return true;
+     } else {
+       return false;
      }
   }
-
-  function checkWin() {
-      checkWinHuman();
-      checkWinComputer();
-  }
-
-  function yourTurn() {
-    humansTurn = !humansTurn;
-  }
+  //
+  // function yourTurn() {
+  //   humansTurn = !humansTurn;
+  // }
 
   function computersTurn() {
     checkEmpties();
     computerCell = emptyCells[randomNumber];
     els[ computerCell ].innerHTML = computer;
+    els[ computerCell ].removeEventListener("click", yourTurnMyTurn);
     updateTheArray();
-    checkWin();
+    checkWinComputer();
   }
 
   function yourTurnMyTurn() {
       this.innerHTML = human;
+      this.removeEventListener("click", yourTurnMyTurn);
       updateTheArray();
-      checkEmpties();
-      computersTurn();
+
+      if ( checkWinHuman() ) {
+        return;
+      } else {
+      setTimeout( computersTurn, 500 );
+    }
   }
 
   function keyboardAccess ( event ) {
@@ -130,6 +155,26 @@ window.addEventListener("DOMContentLoaded", function() {
         el6.style.color = "white";
         dissolveForm();
     }
+  }
+
+  function gameOver() {
+    if ( lastWinner = "human" ) {
+      humanScore++;
+      el8.innerHTML = humanScore;
+    } else {
+      computerScore++;
+      el10.innerHTML = computerScore;
+    }
+
+    els[0].removeEventListener("click", yourTurnMyTurn);
+    els[1].removeEventListener("click", yourTurnMyTurn);
+    els[2].removeEventListener("click", yourTurnMyTurn);
+    els[3].removeEventListener("click", yourTurnMyTurn);
+    els[4].removeEventListener("click", yourTurnMyTurn);
+    els[5].removeEventListener("click", yourTurnMyTurn);
+    els[6].removeEventListener("click", yourTurnMyTurn);
+    els[7].removeEventListener("click", yourTurnMyTurn);
+    els[8].removeEventListener("click", yourTurnMyTurn);
   }
 
   el4.addEventListener("submit", submitLetter);
