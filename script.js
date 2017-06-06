@@ -22,19 +22,30 @@ window.addEventListener("DOMContentLoaded", function() {
       el8 = document.getElementById("human-score"),
       el9 = document.getElementById("computer"),
       el10 = document.getElementById("computer-score"),
+      el11 = document.getElementById("noughts"),
+      el12 = document.getElementById("crosses"),
       els = document.getElementsByTagName("td"),
       els2 = document.getElementsByClassName("scoreboard");
+
 
   function dissolveForm() {
     el.style.opacity = "0";
     el.style.visibility = "hidden";
-    el.className += "left-to-right";
+    el.className += " left-to-right";
     el.style.left = "200%";
     el2.style.visibility = "visible";
     showScoreBoard();
   }
 
   function showScoreBoard() {
+    if ( human === "X" ) {
+      els2[0].style.backgroundColor = "#AAFDE6";
+      els2[1].style.backgroundColor = "#FFA07A";
+    } else {
+      els2[0].style.backgroundColor = "#FFA07A";
+      els2[1].style.backgroundColor = "#AAFDE6";
+    }
+
     el7.innerHTML = human;
     el8.innerHTML = humanScore;
     el9.innerHTML = computer;
@@ -113,10 +124,6 @@ window.addEventListener("DOMContentLoaded", function() {
        return false;
      }
   }
-  //
-  // function yourTurn() {
-  //   humansTurn = !humansTurn;
-  // }
 
   function computersTurn() {
     checkEmpties();
@@ -158,13 +165,13 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 
   function gameOver() {
-    if ( lastWinner = "human" ) {
+    if ( lastWinner === "human" ) {
       humanScore++;
       el8.innerHTML = humanScore;
     } else {
       computerScore++;
       el10.innerHTML = computerScore;
-    }
+      }
 
     els[0].removeEventListener("click", yourTurnMyTurn);
     els[1].removeEventListener("click", yourTurnMyTurn);

@@ -46,10 +46,10 @@ table tr td:last-child {
 
 legend {
   font-family: Audiowide;
-  color: green;
+  color: grey;
 }
 
-#letterform {
+.form {
     width: 80%;
     height: 98%;
     margin-left: 10%;
@@ -71,7 +71,7 @@ legend {
 }
 
 .left-to-right {
-    animation: 3s leftright linear;
+    animation: 6s leftright linear;
 }
 
 @keyframes leftright {
@@ -79,6 +79,18 @@ legend {
         left: 0%;
     } 100% {
         left: 200%;
+    }
+}
+
+.left-right-enter {
+  animation: 3s leftrightenter linear;
+}
+
+@keyframes leftrightenter {
+    0% {
+      left: -200%;
+    } 100% {
+      left: 0%;
     }
 }
 
@@ -117,20 +129,30 @@ legend {
   transform: perspective(1px) translateY(-50%);
   margin: auto;
   visibility: hidden;
-  transition: 5s;
+  transition: 1.5s;
 }
 
 #scoreboard-human {
     left: 4%;
-    background-color: #FFA07A;
 }
 
 #scoreboard-computer {
     right: 4%;
-    background-color: #AAFDE6;
 }
 
 .player {
     font-weight: 600;
     font-size: 2em;
+}
+
+.salmon {
+  color: #FFA07A;
+}
+
+.blue {
+  color: #AAFDE6;
+}
+
+#gameover {
+  display: none;
 }

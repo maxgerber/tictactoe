@@ -14,16 +14,29 @@
 </head>
 
 <body>
-    <section id="letterform">
+    <section id="letterform" class="form">
         <form id="choose-letter">
             <fieldset>
-               <legend>Noughts or crosses?</legend>
+               <legend><span id="noughts" class="salmon">Noughts</span> or <span id="crosses" class="blue">crosses</span>?</legend>
                <input id="x" type="radio" name="letters" value="X" checked>
                <label for="x">X</label><br>
                <input id="o" type="radio" name="letters" value="O">
                <label for="o">O</label><br>
              </fieldset>
              <input type="submit" name="submit" value="Start!" id="submit">
+        </form>
+    </section>
+
+    <section id="gameover" class="form">
+        <form id="new-game">
+            <fieldset>
+               <legend><span class="salmon">New</span> <span class="blue">game</span>?</legend>
+               <input id="y" type="radio" name="yn" value="y">
+               <label for="y">Yes</label><br>
+               <input id="n" type="radio" name="yn" value="n">
+               <label for="n">No</label><br>
+             </fieldset>
+             <!-- <input type="submit" name="submit" value="Start!" id="submit"> -->
         </form>
     </section>
 
