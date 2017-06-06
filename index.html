@@ -15,7 +15,7 @@
 
 <body>
     <section id="letterform" class="form">
-        <form id="choose-letter">
+        <form id="choose-letter" class="form-in-form">
             <fieldset>
                <legend><span id="noughts" class="salmon">Noughts</span> or <span id="crosses" class="blue">crosses</span>?</legend>
                <input id="x" type="radio" name="letters" value="X" checked>
@@ -28,7 +28,7 @@
     </section>
 
     <section id="gameover" class="form">
-        <form id="new-game">
+        <form id="new-game" class="form-in-form">
             <fieldset>
                <legend><span class="salmon">New</span> <span class="blue">game</span>?</legend>
                <input id="y" type="radio" name="yn" value="y">
@@ -36,8 +36,13 @@
                <input id="n" type="radio" name="yn" value="n">
                <label for="n">No</label><br>
              </fieldset>
-             <!-- <input type="submit" name="submit" value="Start!" id="submit"> -->
         </form>
+    </section>
+
+    <section id="thanks" class="form">
+        <div id="thanksforplaying" class="form-in-form">
+          <span class="salmon">Thanks</span> <span class="blue">for playing</span>!
+        </div>
     </section>
 
     <section id="scoreboard-human" class="scoreboard">

@@ -24,6 +24,11 @@ window.addEventListener("DOMContentLoaded", function() {
       el10 = document.getElementById("computer-score"),
       el11 = document.getElementById("noughts"),
       el12 = document.getElementById("crosses"),
+      el13 = document.getElementById("gameover"),
+      el14 = document.getElementById("y"),
+      el15 = document.getElementById("n"),
+      el16 = document.getElementById("thanks"),
+      el17 = document.getElementById("body"),
       els = document.getElementsByTagName("td"),
       els2 = document.getElementsByClassName("scoreboard");
 
@@ -34,7 +39,56 @@ window.addEventListener("DOMContentLoaded", function() {
     el.className += " left-to-right";
     el.style.left = "200%";
     el2.style.visibility = "visible";
+    el6.style.color = "white";
     showScoreBoard();
+  }
+
+  function showNewGameForm() {
+    el13.style.opacity = "1";
+    el13.style.visibility = "visible";
+    els2[0].style.visibility = "hidden";
+    els2[0].style.left = "15%";
+    els2[1].style.right = "15%";
+    els2[1].style.visibility = "hidden";
+    el2.style.visibility = "hidden";
+    el13.style.left = "0";
+    el13.className += " left-right-enter";
+    el14.checked = false;
+    el15.checked = false;
+  }
+
+  function thanksForPlaying() {
+    el13.style.opacity = "0";
+    el13.style.visibility = "hidden";
+    el13.className += " left-to-right";
+    el13.style.left = "200%";
+    el16.style.opacity = "1";
+    el16.style.visibility = "visible";
+    el16.style.left = "0";
+    el16.className += " left-right-enter";
+    document.body.style.backgroundColor = "black";
+  }
+
+  function newGame() {
+    el13.style.opacity = "0";
+    el13.style.visibility = "hidden";
+    els2[0].style.visibility = "visible";
+    els2[0].style.left = "4%";
+    els2[1].style.right = "4%";
+    els2[1].style.visibility = "visible";
+    el2.style.visibility = "visible";
+    el13.style.left = "200%";
+    el13.className += " left-to-right";
+
+    els[0].addEventListener("click", yourTurnMyTurn);
+    els[1].addEventListener("click", yourTurnMyTurn);
+    els[2].addEventListener("click", yourTurnMyTurn);
+    els[3].addEventListener("click", yourTurnMyTurn);
+    els[4].addEventListener("click", yourTurnMyTurn);
+    els[5].addEventListener("click", yourTurnMyTurn);
+    els[6].addEventListener("click", yourTurnMyTurn);
+    els[7].addEventListener("click", yourTurnMyTurn);
+    els[8].addEventListener("click", yourTurnMyTurn);
   }
 
   function showScoreBoard() {
@@ -70,6 +124,12 @@ window.addEventListener("DOMContentLoaded", function() {
   function updateTheArray() {
     for (var i = 0; i < els.length; i++) {
       ticTT[i] = els[i].innerHTML;
+    }
+  }
+
+  function updateTheTable() {
+    for (var i = 0; i < ticTT.length; i++) {
+      els[i].innerHTML = ticTT[i];
     }
   }
 
@@ -135,6 +195,7 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 
   function yourTurnMyTurn() {
+      removeEventListeners();
       this.innerHTML = human;
       this.removeEventListener("click", yourTurnMyTurn);
       updateTheArray();
@@ -143,7 +204,8 @@ window.addEventListener("DOMContentLoaded", function() {
         return;
       } else {
       setTimeout( computersTurn, 500 );
-    }
+      }
+      addEventListeners();
   }
 
   function keyboardAccess ( event ) {
@@ -162,6 +224,41 @@ window.addEventListener("DOMContentLoaded", function() {
         el6.style.color = "white";
         dissolveForm();
     }
+    if ( el13.style.visibility === "visible" ) {
+      if ( event.keyCode === 89 ) {
+        el14.checked = true;
+        newGame();
+      }
+
+      if ( event.keyCode === 78 ) {
+        el15.checked = true;
+        thanksForPlaying();
+      }
+    }
+  }
+
+  function removeEventListeners() {
+    els[0].removeEventListener("click", yourTurnMyTurn);
+    els[1].removeEventListener("click", yourTurnMyTurn);
+    els[2].removeEventListener("click", yourTurnMyTurn);
+    els[3].removeEventListener("click", yourTurnMyTurn);
+    els[4].removeEventListener("click", yourTurnMyTurn);
+    els[5].removeEventListener("click", yourTurnMyTurn);
+    els[6].removeEventListener("click", yourTurnMyTurn);
+    els[7].removeEventListener("click", yourTurnMyTurn);
+    els[8].removeEventListener("click", yourTurnMyTurn);
+  }
+
+  function addEventListeners() {
+    els[0].addEventListener("click", yourTurnMyTurn);
+    els[1].addEventListener("click", yourTurnMyTurn);
+    els[2].addEventListener("click", yourTurnMyTurn);
+    els[3].addEventListener("click", yourTurnMyTurn);
+    els[4].addEventListener("click", yourTurnMyTurn);
+    els[5].addEventListener("click", yourTurnMyTurn);
+    els[6].addEventListener("click", yourTurnMyTurn);
+    els[7].addEventListener("click", yourTurnMyTurn);
+    els[8].addEventListener("click", yourTurnMyTurn);
   }
 
   function gameOver() {
@@ -173,15 +270,11 @@ window.addEventListener("DOMContentLoaded", function() {
       el10.innerHTML = computerScore;
       }
 
-    els[0].removeEventListener("click", yourTurnMyTurn);
-    els[1].removeEventListener("click", yourTurnMyTurn);
-    els[2].removeEventListener("click", yourTurnMyTurn);
-    els[3].removeEventListener("click", yourTurnMyTurn);
-    els[4].removeEventListener("click", yourTurnMyTurn);
-    els[5].removeEventListener("click", yourTurnMyTurn);
-    els[6].removeEventListener("click", yourTurnMyTurn);
-    els[7].removeEventListener("click", yourTurnMyTurn);
-    els[8].removeEventListener("click", yourTurnMyTurn);
+      removeEventListeners();
+
+    ticTT = ["", "", "", "", "", "", "", "", ""];
+    updateTheTable();
+    showNewGameForm();
   }
 
   el4.addEventListener("submit", submitLetter);
@@ -194,5 +287,8 @@ window.addEventListener("DOMContentLoaded", function() {
   els[6].addEventListener("click", yourTurnMyTurn);
   els[7].addEventListener("click", yourTurnMyTurn);
   els[8].addEventListener("click", yourTurnMyTurn);
+
+  el14.addEventListener("click", newGame);
+  el15.addEventListener("click", thanksForPlaying);
   window.addEventListener("keydown", keyboardAccess);
 });

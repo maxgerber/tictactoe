@@ -5,6 +5,11 @@ html, body {
     width: 100%;
 }
 
+body {
+  transition: 1s;
+  background-color: white;
+}
+
 #tttcontainer {
     postion: relative;
     width: 90%;
@@ -60,9 +65,10 @@ legend {
     z-index: 1;
     position: fixed;
     transition: 3s;
+    text-align: center;
 }
 
-#choose-letter {
+.form-in-form {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -71,7 +77,7 @@ legend {
 }
 
 .left-to-right {
-    animation: 6s leftright linear;
+    animation: 1.5s leftright linear;
 }
 
 @keyframes leftright {
@@ -83,12 +89,12 @@ legend {
 }
 
 .left-right-enter {
-  animation: 3s leftrightenter linear;
+  animation: 1.5s leftrightenter linear;
 }
 
 @keyframes leftrightenter {
     0% {
-      left: -200%;
+      left: -10%;
     } 100% {
       left: 0%;
     }
@@ -129,7 +135,7 @@ legend {
   transform: perspective(1px) translateY(-50%);
   margin: auto;
   visibility: hidden;
-  transition: 1.5s;
+  transition: 3s;
 }
 
 #scoreboard-human {
@@ -154,5 +160,18 @@ legend {
 }
 
 #gameover {
-  display: none;
+  visibility: hidden;
+  left: -10%;
+  opacity: 0;
+}
+
+#thanks {
+  visibility: hidden;
+  left: -10%;
+  opacity: 0;
+}
+
+#thanks {
+  font-family: "Audiowide";
+  font-size: 6em;
 }
