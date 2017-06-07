@@ -44,15 +44,21 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 
   function showNewGameForm() {
-    el13.style.opacity = "1";
-    el13.style.visibility = "visible";
+
     els2[0].style.visibility = "hidden";
     els2[0].style.left = "15%";
     els2[1].style.right = "15%";
     els2[1].style.visibility = "hidden";
     el2.style.visibility = "hidden";
-    el13.style.left = "0";
-    el13.className += " left-right-enter";
+
+    setTimeout( function() {
+      el13.style.left = "0";
+      el13.className += " left-right-enter";
+      el13.style.opacity = "1";
+      el13.style.visibility = "visible";
+    }, 500
+    );
+
     el14.checked = false;
     el15.checked = false;
   }
@@ -106,6 +112,8 @@ window.addEventListener("DOMContentLoaded", function() {
     el10.innerHTML = computerScore;
     els2[0].style.visibility = "visible";
     els2[1].style.visibility = "visible";
+    els2[0].style.left = "4%";
+    els2[1].style.right = "4%";
   }
 
   function submitLetter( submit ) {
@@ -192,10 +200,14 @@ window.addEventListener("DOMContentLoaded", function() {
     els[ computerCell ].removeEventListener("click", yourTurnMyTurn);
     updateTheArray();
     checkWinComputer();
+    if ( computerCell == undefined ) {
+      lastWinner = "draw";
+      gameOver();
+    }
   }
 
   function yourTurnMyTurn() {
-      removeEventListeners();
+      // removeEventListeners();
       this.innerHTML = human;
       this.removeEventListener("click", yourTurnMyTurn);
       updateTheArray();
@@ -205,7 +217,20 @@ window.addEventListener("DOMContentLoaded", function() {
       } else {
       setTimeout( computersTurn, 500 );
       }
-      addEventListeners();
+
+
+      // addEventListeners();
+  }
+
+  function checkDraw() {
+      checkEmpties();
+      if ( emptyCells.length === 0 ) {
+        lastWinner = "draw";
+        gameOver();
+        return true;
+      } else {
+        return false;
+      }
   }
 
   function keyboardAccess ( event ) {
@@ -265,12 +290,13 @@ window.addEventListener("DOMContentLoaded", function() {
     if ( lastWinner === "human" ) {
       humanScore++;
       el8.innerHTML = humanScore;
-    } else {
+    } else if ( lastWinner === "computer" ) {
       computerScore++;
       el10.innerHTML = computerScore;
-      }
-
-      removeEventListeners();
+    } else {
+      return;
+    }
+    removeEventListeners();
 
     ticTT = ["", "", "", "", "", "", "", "", ""];
     updateTheTable();

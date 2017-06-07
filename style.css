@@ -139,11 +139,11 @@ legend {
 }
 
 #scoreboard-human {
-    left: 4%;
+    left: 10%;
 }
 
 #scoreboard-computer {
-    right: 4%;
+    right: 10%;
 }
 
 .player {
