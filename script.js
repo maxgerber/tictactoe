@@ -12,6 +12,7 @@ window.addEventListener("DOMContentLoaded", function() {
       humanScore = 0,
       computerScore = 0,
       lastWinner = "",
+      spaceUsed = false,
       el = document.getElementById("letterform"),
       el2 = document.getElementById("tictactoe"),
       el3 = document.getElementById("x"),
@@ -29,6 +30,7 @@ window.addEventListener("DOMContentLoaded", function() {
       el15 = document.getElementById("n"),
       el16 = document.getElementById("thanks"),
       el17 = document.getElementById("body"),
+      el18 = document.getElementById("draw"),
       els = document.getElementsByTagName("td"),
       els2 = document.getElementsByClassName("scoreboard");
 
@@ -40,6 +42,7 @@ window.addEventListener("DOMContentLoaded", function() {
     el.style.left = "200%";
     el2.style.visibility = "visible";
     el6.style.color = "white";
+    spaceUsed = true;
     showScoreBoard();
   }
 
@@ -200,14 +203,9 @@ window.addEventListener("DOMContentLoaded", function() {
     els[ computerCell ].removeEventListener("click", yourTurnMyTurn);
     updateTheArray();
     checkWinComputer();
-    if ( computerCell == undefined ) {
-      lastWinner = "draw";
-      gameOver();
-    }
   }
 
   function yourTurnMyTurn() {
-      // removeEventListeners();
       this.innerHTML = human;
       this.removeEventListener("click", yourTurnMyTurn);
       updateTheArray();
@@ -217,14 +215,12 @@ window.addEventListener("DOMContentLoaded", function() {
       } else {
       setTimeout( computersTurn, 500 );
       }
-
-
-      // addEventListeners();
+      checkDraw();
   }
 
   function checkDraw() {
       checkEmpties();
-      if ( emptyCells.length === 0 ) {
+      if ( emptyCells.length < 1 ) {
         lastWinner = "draw";
         gameOver();
         return true;
@@ -234,14 +230,15 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 
   function keyboardAccess ( event ) {
-    if ( event.keyCode === 88 ) {
+    if ( event.keyCode === 88 && spaceUsed === false ) {
       el3.checked = true;
-    } if ( event.keyCode === 79 ) {
+    } if ( event.keyCode === 79 && spaceUsed === false ) {
       el5.checked = true;
-    } if ( event.keyCode === 32 ) {
+    } if ( event.keyCode === 32 && spaceUsed === false ) {
         if ( el3.checked ) {
           human = "X";
           computer = "O";
+          spaceUsed = true;
         } else {
           human = "O";
           computer = "X";
@@ -293,8 +290,8 @@ window.addEventListener("DOMContentLoaded", function() {
     } else if ( lastWinner === "computer" ) {
       computerScore++;
       el10.innerHTML = computerScore;
-    } else {
-      return;
+    } else if ( lastWinner === "draw" ) {
+      alert("You drew!");
     }
     removeEventListeners();
 
@@ -302,6 +299,11 @@ window.addEventListener("DOMContentLoaded", function() {
     updateTheTable();
     showNewGameForm();
   }
+
+  // function drawCheat() {
+  //   ticTT = ["X", "O", "X", "O", "X", "X", "O", "", "O"];
+  //   updateTheTable();
+  // }
 
   el4.addEventListener("submit", submitLetter);
   els[0].addEventListener("click", yourTurnMyTurn);
@@ -313,7 +315,6 @@ window.addEventListener("DOMContentLoaded", function() {
   els[6].addEventListener("click", yourTurnMyTurn);
   els[7].addEventListener("click", yourTurnMyTurn);
   els[8].addEventListener("click", yourTurnMyTurn);
-
   el14.addEventListener("click", newGame);
   el15.addEventListener("click", thanksForPlaying);
   window.addEventListener("keydown", keyboardAccess);
